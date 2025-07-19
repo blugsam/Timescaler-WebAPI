@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Timescaler.Domain.Entities;
 
-namespace Timescaler.Infrastructure.Persistence.Configurations;
+namespace Timescaler.Infrastructure.Data.Configurations;
 
 public class ValueEntryConfiguration : IEntityTypeConfiguration<RawValue>
 {
