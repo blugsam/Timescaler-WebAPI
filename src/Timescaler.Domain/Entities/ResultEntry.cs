@@ -1,14 +1,15 @@
-﻿namespace Timescaler.Domain.Entities
+﻿namespace Timescaler.Domain.Entities;
+
+public class ResultEntry
 {
-    public class ResultEntry
-    {
-        public Guid Id { get; set; }
-        public string FileName { get; set; } = string.Empty;
-        public DateTime FirstOperationDate { get; set; }
-        public double AverageExecutionTime { get; set; }
-        public double AverageValue { get; set; }
-        public double MedianValue { get; set; }
-        public double MaxValue { get; set; }
-        public double MinValue { get; set; }
-    }
+    public Guid Id { get; set; }
+    public string FileName { get; set; } = string.Empty;
+    public DateTime FirstOperationDate { get; set; }
+    public decimal AverageExecutionTime { get; set; }
+    public decimal AverageValue { get; set; }
+    public decimal MedianValue { get; set; }
+    public decimal MaxValue { get; set; }
+    public decimal MinValue { get; set; }
+
+    public ICollection<ValueEntry> Values { get; set; } = new List<ValueEntry>();
 }
