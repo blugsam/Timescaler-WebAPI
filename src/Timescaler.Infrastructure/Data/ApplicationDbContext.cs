@@ -2,7 +2,7 @@
 using System.Reflection;
 using Timescaler.Domain.Entities;
 
-namespace Timescaler.Infrastructure.Persistence;
+namespace Timescaler.Infrastructure.Data;
 
 public class TimescalerDbContext : DbContext
 {
