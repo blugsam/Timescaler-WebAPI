@@ -1,6 +1,6 @@
 ﻿namespace Timescaler.Domain.Entities;
 
-public class ResultEntry
+public class Result
 {
     public Guid Id { get; set; }
     public string FileName { get; set; } = string.Empty;
@@ -12,5 +12,5 @@ public class ResultEntry
     public decimal MaxValue { get; set; }
     public decimal MinValue { get; set; }
 
-    public ICollection<ValueEntry> Values { get; set; } = new List<ValueEntry>();
+    public ICollection<RawValue> RawValues { get; set; } = new List<RawValue>();
 }
