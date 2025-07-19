@@ -5,7 +5,8 @@ public class ResultEntry
     public Guid Id { get; set; }
     public string FileName { get; set; } = string.Empty;
     public DateTime FirstOperationDate { get; set; }
-    public decimal AverageExecutionTime { get; set; }
+    public TimeSpan TimeDelta { get; set; }
+    public double AverageExecutionTime { get; set; }
     public decimal AverageValue { get; set; }
     public decimal MedianValue { get; set; }
     public decimal MaxValue { get; set; }
