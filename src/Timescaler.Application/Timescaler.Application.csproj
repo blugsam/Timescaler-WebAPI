@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\RawValues\" />
+    <Folder Include="Services\Result\" />
+    <Folder Include="Services\Import\" />
+  </ItemGroup>
+
 </Project>
