@@ -4,7 +4,7 @@ using Timescaler.Domain.Entities;
 
 namespace Timescaler.Infrastructure.Data.Configurations;
 
-public class ValueEntryConfiguration : IEntityTypeConfiguration<RawValue>
+public class ValueConfiguration : IEntityTypeConfiguration<RawValue>
 {
     public void Configure(EntityTypeBuilder<RawValue> builder)
     {
@@ -37,7 +37,7 @@ public class ValueEntryConfiguration : IEntityTypeConfiguration<RawValue>
             .HasForeignKey(x => x.ResultId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasIndex(x => new { x.ResultId, x.Date }, "IX_Values_ResultEntryId_Date_Desc")
+        builder.HasIndex(x => new { x.ResultId, x.Date }, "IX_Values_ResultId_Date_Desc")
             .IsDescending(false, true);
     }
 }

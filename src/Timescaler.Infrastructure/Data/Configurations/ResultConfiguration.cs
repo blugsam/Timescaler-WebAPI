@@ -4,7 +4,7 @@ using Timescaler.Domain.Entities;
 
 namespace Timescaler.Infrastructure.Data.Configurations;
 
-public class ResultEntryConfiguration : IEntityTypeConfiguration<Result>
+public class ResultConfiguration : IEntityTypeConfiguration<Result>
 {
     public void Configure(EntityTypeBuilder<Result> builder)
     {
