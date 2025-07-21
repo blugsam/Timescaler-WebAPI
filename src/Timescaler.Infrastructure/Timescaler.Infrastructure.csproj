@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Timescaler.Application\Timescaler.Application.csproj" />
     <ProjectReference Include="..\Timescaler.Domain\Timescaler.Domain.csproj" />
   </ItemGroup>
 
