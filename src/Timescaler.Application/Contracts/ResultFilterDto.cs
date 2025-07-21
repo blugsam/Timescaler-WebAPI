@@ -6,7 +6,7 @@
         DateTime? StartDateTo,
         decimal? AvgValueMin,
         decimal? AvgValueMax,
-        decimal? AvgExecTimeMin,
-        decimal? AvgExecTimeMax
+        double? AvgExecTimeMin,
+        double? AvgExecTimeMax
     );
 }
