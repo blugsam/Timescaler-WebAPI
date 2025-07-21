@@ -1,11 +1,8 @@
-﻿using Timescaler.Application.Contracts;
+﻿using Timescaler.Domain.Entities;
 
 namespace Timescaler.Application.Services.Interfaces;
 
 public interface IResultWriter
 {
-    Task<ImportSummaryDto> ImportAsync(
-    Stream csvStream,
-    string fileName,
-    CancellationToken ct = default);
+    Task<Guid> CreateOrUpdateAsync(Result result, CancellationToken ct = default);
 }

@@ -7,9 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\RawValues\" />
     <Folder Include="Services\Result\" />
-    <Folder Include="Services\Import\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Timescaler.Domain\Timescaler.Domain.csproj" />
   </ItemGroup>
 
 </Project>
