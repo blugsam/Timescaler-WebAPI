@@ -11,7 +11,7 @@ public class TimescalerDbContext : DbContext
     {
     }
 
-    public DbSet<RawValue> Values { get; set; }
+    public DbSet<RawValue> RawValues { get; set; }
     public DbSet<Result> Results { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
