@@ -2,5 +2,5 @@
 
 public interface ICsvParser
 {
-    Task<CsvProcessingResult> ParseAndValidateAsync(Stream stream, CancellationToken ct = default);
+    IAsyncEnumerable<(int LineNumber, string[] Fields)> ParseAsync(Stream stream, CancellationToken ct = default);
 }
