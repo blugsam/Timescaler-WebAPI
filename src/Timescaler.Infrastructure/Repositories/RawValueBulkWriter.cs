@@ -2,8 +2,8 @@
 using NpgsqlTypes;
 using Microsoft.EntityFrameworkCore;
 using Timescaler.Application.Contracts;
-using Timescaler.Application.Services.Interfaces;
 using Timescaler.Infrastructure.Data;
+using Timescaler.Application.Ports;
 
 namespace Timescaler.Infrastructure.Repositories;
 

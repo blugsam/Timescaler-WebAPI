@@ -1,6 +1,6 @@
 ﻿using Timescaler.Domain.Entities;
 
-namespace Timescaler.Application.Services.Interfaces;
+namespace Timescaler.Application.Ports;
 
 public interface IResultWriter
 {

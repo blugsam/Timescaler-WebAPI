@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
-using Timescaler.Application.Services.Interfaces;
+using Timescaler.Application.Ports;
 using Timescaler.Infrastructure.Data;
 
 namespace Timescaler.Infrastructure.Repositories;

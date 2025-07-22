@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Timescaler.Application.Services.Interfaces;
 
-namespace Timescaler.Application.Services;
+namespace Timescaler.Application.Services.Parsing;
 
 public class CsvParser : ICsvParser
 {

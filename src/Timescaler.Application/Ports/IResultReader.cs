@@ -1,6 +1,6 @@
 ﻿using Timescaler.Application.Contracts;
 
-namespace Timescaler.Application.Services.Interfaces;
+namespace Timescaler.Application.Ports;
 
 public interface IResultReader
 {

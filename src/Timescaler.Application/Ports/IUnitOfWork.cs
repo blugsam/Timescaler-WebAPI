@@ -1,4 +1,4 @@
-﻿namespace Timescaler.Application.Services.Interfaces;
+﻿namespace Timescaler.Application.Ports;
 
 public interface IUnitOfWork : IAsyncDisposable
 {
