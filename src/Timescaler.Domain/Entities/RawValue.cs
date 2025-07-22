@@ -1,4 +1,6 @@
-﻿namespace Timescaler.Domain.Entities;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Timescaler.Domain.Entities;
 
 public class RawValue
 {
@@ -9,4 +11,17 @@ public class RawValue
 
     public Guid ResultId { get; set; }
     public required Result Result { get; set; }
+
+    private RawValue() { }
+
+    [SetsRequiredMembers]
+    public RawValue(DateTime date, double executionTime, decimal value, Result result)
+    {
+        Id = Guid.NewGuid();
+        Date = date;
+        ExecutionTime = executionTime;
+        Value = value;
+        Result = result;
+        ResultId = result.Id;
+    }
 }
