@@ -1,12 +1,20 @@
-﻿using System.Globalization;
+﻿using FluentValidation;
 using Timescaler.Application.Contracts;
+using Timescaler.Application.Services.Interfaces;
 
 namespace Timescaler.Application.Validation;
 
 public class FileValidator : IFileValidator
 {
     private const int MaxRowCount = 10000;
-    private static readonly DateTime MinDate = new(2000, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    private const int MinRowCount = 1;
+
+    private readonly IValidator<CsvRow> _csvRowValidator;
+
+    public FileValidator(IValidator<CsvRow> csvRowValidator)
+    {
+        _csvRowValidator = csvRowValidator;
+    }
 
     public async Task<FileValidationResult> ValidateAsync(
         IAsyncEnumerable<(int LineNumber, string[] Fields)> parsedLines,
@@ -14,61 +22,37 @@ public class FileValidator : IFileValidator
     {
         var validRecords = new List<ParsedValueRecord>();
         var errors = new List<ValidationError>();
+        var rowCount = 0;
 
         await foreach (var (lineNumber, fields) in parsedLines.WithCancellation(ct))
         {
-            var lineErrors = new List<ValidationError>();
-            var parsedRecord = ValidateLine(lineNumber, fields, lineErrors);
+            rowCount++;
+            var csvRow = new CsvRow(lineNumber, fields);
+            var validationResult = await _csvRowValidator.ValidateAsync(csvRow, ct);
 
-            if (lineErrors.Any())
+            if (validationResult.IsValid)
             {
-                errors.AddRange(lineErrors);
+                var (_, record) = CsvRowValidator.TryParseToRecord(fields);
+                validRecords.Add(record!);
             }
             else
             {
-                validRecords.Add(parsedRecord!);
+                foreach (var error in validationResult.Errors)
+                {
+                    errors.Add(new ValidationError(lineNumber, error.ErrorMessage));
+                }
             }
         }
 
-        if (!errors.Any())
-        {
-            if (validRecords.Count == 0)
-                errors.Add(new ValidationError(0, "Файл не содержит данных."));
-            if (validRecords.Count > MaxRowCount)
-                errors.Add(new ValidationError(0, $"Количество строк ({validRecords.Count}) превышает максимальное ({MaxRowCount})."));
-        }
+        if (rowCount < MinRowCount)
+            errors.Insert(0, new ValidationError(0, $"Файл должен содержать минимум {MinRowCount} строку с данными."));
+        if (rowCount > MaxRowCount)
+            errors.Insert(0, new ValidationError(0, $"Количество строк в файле ({rowCount}) превышает максимум ({MaxRowCount})."));
 
         return new FileValidationResult
         {
-            ValidRecords = validRecords,
+            ValidRecords = errors.Any() ? new List<ParsedValueRecord>() : validRecords,
             Errors = errors
         };
-    }
-
-    public static ParsedValueRecord? ValidateLine(int lineNumber, string[] fields, List<ValidationError> errors)
-    {
-        if (fields.Length != 3)
-        {
-            errors.Add(new ValidationError(lineNumber, "Неверное количество столбцов (ожидается 3)."));
-            return null;
-        }
-
-        var dateParseSuccess = DateTime.TryParse(fields[0], CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out var date);
-        var timeParseSuccess = double.TryParse(fields[1], CultureInfo.InvariantCulture, out var executionTime);
-        var valueParseSuccess = decimal.TryParse(fields[2], CultureInfo.InvariantCulture, out var value);
-
-        if (!dateParseSuccess) errors.Add(new ValidationError(lineNumber, "Неверный формат даты."));
-        if (!timeParseSuccess) errors.Add(new ValidationError(lineNumber, "Неверный формат времени выполнения."));
-        if (!valueParseSuccess) errors.Add(new ValidationError(lineNumber, "Неверный формат значения."));
-
-        if (errors.Any()) return null;
-
-        if (date > DateTime.UtcNow || date < MinDate) errors.Add(new ValidationError(lineNumber, "Дата выходит за допустимый диапазон."));
-        if (executionTime < 0) errors.Add(new ValidationError(lineNumber, "Время выполнения не может быть отрицательным."));
-        if (value < 0) errors.Add(new ValidationError(lineNumber, "Значение не может быть отрицательным."));
-
-        if (errors.Any()) return null;
-
-        return new ParsedValueRecord(date, executionTime, value);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Timescaler.Application.Validation;
+﻿using Timescaler.Application.Validation;
+
+namespace Timescaler.Application.Services.Interfaces;
 
 public interface IFileValidator
 {
