@@ -39,16 +39,15 @@ public sealed class ResultRepository : IResultRepository
 
         query = ApplyFilter(query, filter);
 
-        var countTask = query.CountAsync(ct);
-        var itemsTask = query
+        var totalCount = await query.CountAsync(ct);
+
+        var items = await query
             .OrderByDescending(r => r.FirstOperationDate)
             .Skip((page.Number - 1) * page.Size)
             .Take(page.Size)
             .ToListAsync(ct);
 
-        await Task.WhenAll(countTask, itemsTask);
-
-        return (itemsTask.Result, countTask.Result);
+        return (items, totalCount);
     }
 
     private IQueryable<Result> ApplyFilter(IQueryable<Result> query, ResultFilter filter)
