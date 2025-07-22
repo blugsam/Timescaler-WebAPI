@@ -29,6 +29,8 @@ public sealed class ResultRepository : IResultRepository
         var newResult = Result.Create(fileName, records);
 
         await _dbContext.Results.AddAsync(newResult, ct);
+
+        await _dbContext.SaveChangesAsync(ct);
     }
 
     public async Task<(IReadOnlyList<Result> Items, int TotalCount)> FindAsync(ResultFilter filter, Page page, CancellationToken ct)
