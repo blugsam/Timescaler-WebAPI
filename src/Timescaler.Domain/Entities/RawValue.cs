@@ -12,7 +12,10 @@ public class RawValue
     public Guid ResultId { get; set; }
     public required Result Result { get; set; }
 
-    private RawValue() { }
+    private RawValue()
+    {
+
+    }
 
     [SetsRequiredMembers]
     public RawValue(DateTime date, double executionTime, decimal value, Result result)

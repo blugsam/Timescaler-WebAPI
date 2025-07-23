@@ -1,4 +1,5 @@
-﻿using Timescaler.Domain.ValueObjects;
+﻿using System.Diagnostics.CodeAnalysis;
+using Timescaler.Domain.ValueObjects;
 
 namespace Timescaler.Domain.Entities;
 
@@ -17,7 +18,10 @@ public class Result
     private readonly List<RawValue> _rawValues = new();
     public IReadOnlyList<RawValue> RawValues => _rawValues.AsReadOnly();
 
-    private Result() { }
+    private Result()
+    {
+        FileName = null!;
+    }
 
     public static Result Create(string fileName, IReadOnlyList<RawDataPoint> records)
     {
