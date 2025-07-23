@@ -5,13 +5,13 @@ using Timescaler.Application.Services.Interfaces;
 namespace Timescaler.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
-public class UploadFileController : ControllerBase
+[Route("api/import")]
+public class ImportController : ControllerBase
 {
     private readonly IDataProcessingService _dataProcessingService;
-    private readonly ILogger<UploadFileController> _logger;
+    private readonly ILogger<ImportController> _logger;
 
-    public UploadFileController(IDataProcessingService dataProcessingService, ILogger<UploadFileController> logger)
+    public ImportController(IDataProcessingService dataProcessingService, ILogger<ImportController> logger)
     {
         _dataProcessingService = dataProcessingService;
         _logger = logger;

@@ -3,34 +3,30 @@ using Timescaler.Application.Contracts;
 using Timescaler.Application.Services.Interfaces;
 using Timescaler.Domain.ValueObjects;
 
-namespace Timescaler.API.Controllers;
-
 [ApiController]
-[Route("api/[controller]")]
-public class GetResultsContoller : ControllerBase
+[Route("api/results")]
+public class ResultsController : ControllerBase
 {
     private readonly IDataProcessingService _dataProcessingService;
-    private readonly ILogger<GetResultsContoller> _logger;
 
-    public GetResultsContoller(IDataProcessingService dataProcessingService, ILogger<GetResultsContoller> logger)
+    public ResultsController(IDataProcessingService dataProcessingService)
     {
         _dataProcessingService = dataProcessingService;
-        _logger = logger;
     }
 
-    [HttpGet("results")]
+    [HttpGet]
     [ProducesResponseType(typeof(PaginatedList<ResultDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetResults(
-    [FromQuery] string? fileName,
-    [FromQuery] DateTime? fromDate,
-    [FromQuery] DateTime? toDate,
-    [FromQuery] decimal? minAvgValue,
-    [FromQuery] decimal? maxAvgValue,
-    [FromQuery] double? minAvgExecTime,
-    [FromQuery] double? maxAvgExecTime,
-    [FromQuery] int pageNumber = 1,
-    [FromQuery] int pageSize = 20,
-    CancellationToken ct = default)
+        [FromQuery] string? fileName,
+        [FromQuery] DateTime? fromDate,
+        [FromQuery] DateTime? toDate,
+        [FromQuery] decimal? minAvgValue,
+        [FromQuery] decimal? maxAvgValue,
+        [FromQuery] double? minAvgExecTime,
+        [FromQuery] double? maxAvgExecTime,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 20,
+        CancellationToken ct = default)
     {
         var filter = new ResultFilter(
             FileName: fileName,
@@ -42,5 +38,20 @@ public class GetResultsContoller : ControllerBase
 
         var results = await _dataProcessingService.GetResultsAsync(filter, page, ct);
         return Ok(results);
+    }
+
+    [HttpGet("{fileName}/last-values")]
+    [ProducesResponseType(typeof(IReadOnlyList<RawValueDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetLastValues(string fileName, CancellationToken ct)
+    {
+        var values = await _dataProcessingService.GetLastRawValuesAsync(fileName, ct);
+
+        if (!values.Any())
+        {
+            return NotFound($"Данные для файла '{fileName}' не найдены.");
+        }
+
+        return Ok(values);
     }
 }
