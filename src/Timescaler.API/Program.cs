@@ -1,6 +1,6 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using Timescaler.Application.Ports;
+using Timescaler.Domain.Repositories;
 using Timescaler.Application.Services;
 using Timescaler.Application.Services.Interfaces;
 using Timescaler.Application.Services.Parsing;

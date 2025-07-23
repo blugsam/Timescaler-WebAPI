@@ -1,7 +1,7 @@
 ﻿using Timescaler.Domain.Entities;
 using Timescaler.Domain.ValueObjects;
 
-namespace Timescaler.Application.Ports;
+namespace Timescaler.Domain.Repositories;
 
 public interface IResultRepository
 {

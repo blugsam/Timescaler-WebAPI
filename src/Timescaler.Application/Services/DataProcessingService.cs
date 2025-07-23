@@ -3,7 +3,7 @@ using FluentValidation.Results;
 using Microsoft.Extensions.Logging;
 using Timescaler.Application.Contracts;
 using Timescaler.Application.Mapping;
-using Timescaler.Application.Ports;
+using Timescaler.Domain.Repositories;
 using Timescaler.Application.Services.Interfaces;
 using Timescaler.Domain.ValueObjects;
 

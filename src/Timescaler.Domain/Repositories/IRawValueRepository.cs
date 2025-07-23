@@ -1,6 +1,6 @@
 ﻿using Timescaler.Domain.Entities;
 
-namespace Timescaler.Application.Ports;
+namespace Timescaler.Domain.Repositories;
 
 public interface IRawValueRepository
 {

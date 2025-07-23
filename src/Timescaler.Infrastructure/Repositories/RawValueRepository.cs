@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Timescaler.Application.Ports;
+using Timescaler.Domain.Repositories;
 using Timescaler.Domain.Entities;
 using Timescaler.Infrastructure.Data;
 
