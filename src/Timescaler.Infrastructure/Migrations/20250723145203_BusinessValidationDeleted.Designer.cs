@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Timescaler.Infrastructure.Data;
@@ -11,9 +12,11 @@ using Timescaler.Infrastructure.Data;
 namespace Timescaler.Infrastructure.Migrations
 {
     [DbContext(typeof(TimescalerDbContext))]
-    partial class TimescalerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250723145203_BusinessValidationDeleted")]
+    partial class BusinessValidationDeleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
