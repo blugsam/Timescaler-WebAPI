@@ -6,6 +6,9 @@ namespace Timescaler.Infrastructure.Data.Configurations;
 
 public class ResultConfiguration : IEntityTypeConfiguration<Result>
 {
+    private const int DecimalPrecision = 18;
+    private const int DecimalScale = 6;
+
     public void Configure(EntityTypeBuilder<Result> builder)
     {
         builder.ToTable("Results",t =>
@@ -27,12 +30,10 @@ public class ResultConfiguration : IEntityTypeConfiguration<Result>
         builder.Property(x => x.TimeDelta)
             .HasColumnType("interval");
 
-        var decimalPrecision = 18;
-        var decimalScale = 6;
-        builder.Property(x => x.AverageValue).HasPrecision(decimalPrecision, decimalScale);
-        builder.Property(x => x.MedianValue).HasPrecision(decimalPrecision, decimalScale);
-        builder.Property(x => x.MaxValue).HasPrecision(decimalPrecision, decimalScale);
-        builder.Property(x => x.MinValue).HasPrecision(decimalPrecision, decimalScale);
+        builder.Property(x => x.AverageValue).HasPrecision(DecimalPrecision, DecimalScale);
+        builder.Property(x => x.MedianValue).HasPrecision(DecimalPrecision, DecimalScale);
+        builder.Property(x => x.MaxValue).HasPrecision(DecimalPrecision, DecimalScale);
+        builder.Property(x => x.MinValue).HasPrecision(DecimalPrecision, DecimalScale);
 
         builder.Property(x => x.AverageExecutionTime);
 
