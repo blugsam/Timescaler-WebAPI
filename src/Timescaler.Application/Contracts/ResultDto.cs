@@ -4,7 +4,7 @@ public sealed record ResultDto(
     Guid Id,
     string FileName,
     DateTime FirstOperationDate,
-    TimeSpan TimeDelta,
+    double TimeDelta,
     double AverageExecutionTime,
     decimal AverageValue,
     decimal MedianValue,

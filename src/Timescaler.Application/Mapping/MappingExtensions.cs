@@ -20,7 +20,7 @@ public static class MappingExtensions
             result.Id,
             result.FileName,
             result.FirstOperationDate,
-            result.TimeDelta,
+            result.TimeDelta.TotalSeconds,
             result.AverageExecutionTime,
             result.AverageValue,
             result.MedianValue,
