@@ -27,8 +27,20 @@ public class Result
         if (records == null || !records.Any())
             throw new ArgumentException("Коллекция записей не может быть пустой.", nameof(records));
 
-        var dates = records.Select(r => r.Date).ToArray();
-        var values = records.Select(r => r.Value).OrderBy(v => v).ToArray();
+        var dates = new List<DateTime>(records.Count);
+        var values = new List<decimal>(records.Count);
+        double totalExecutionTime = 0;
+        decimal totalValue = 0;
+
+        foreach (var record in records)
+        {
+            dates.Add(record.Date);
+            values.Add(record.Value);
+            totalExecutionTime += record.ExecutionTime;
+            totalValue += record.Value;
+        }
+
+        values.Sort();
 
         var result = new Result
         {
@@ -36,11 +48,11 @@ public class Result
             FileName = fileName,
             FirstOperationDate = dates.Min(),
             TimeDelta = dates.Max() - dates.Min(),
-            AverageExecutionTime = records.Average(r => r.ExecutionTime),
-            AverageValue = records.Average(r => r.Value),
+            AverageExecutionTime = totalExecutionTime / records.Count,
+            AverageValue = totalValue / records.Count,
             MedianValue = CalculateMedian(values),
-            MaxValue = values.Last(),
-            MinValue = values.First()
+            MaxValue = values[^1],
+            MinValue = values[0]
         };
 
         foreach (var record in records)
