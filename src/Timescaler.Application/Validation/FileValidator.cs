@@ -36,7 +36,6 @@ public class FileValidator : IFileValidator
             rowCount++;
             var rawRow = new RawCsvRow(lineNumber, fields);
 
-            // Этап 1: Структурная валидация
             var structureResult = await _structureValidator.ValidateAsync(rawRow, ct);
             if (!structureResult.IsValid)
             {
@@ -45,15 +44,19 @@ public class FileValidator : IFileValidator
                 continue;
             }
 
-            // Этап 2: Парсинг
             if (!_parser.TryParse(rawRow, out var parsedRow, out var parseError))
             {
                 errors.Add(new ValidationError(lineNumber, parseError!));
                 continue;
             }
 
-            // Этап 3: Бизнес-валидация
-            var businessResult = await _businessRulesValidator.ValidateAsync(parsedRow!, ct);
+            if (parsedRow is null)
+            {
+                errors.Add(new ValidationError(lineNumber, "Произошла внутренняя ошибка парсинга."));
+                continue;
+            }
+
+            var businessResult = await _businessRulesValidator.ValidateAsync(parsedRow, ct);
             if (!businessResult.IsValid)
             {
                 errors.AddRange(businessResult.Errors.Select(e =>
@@ -61,14 +64,12 @@ public class FileValidator : IFileValidator
                 continue;
             }
 
-            // Все этапы пройдены успешно
             validRecords.Add(new ParsedValueRecord(
                 parsedRow.Date,
                 parsedRow.ExecutionTime,
                 parsedRow.Value));
         }
 
-        // Этап 4: Валидация файла как целого
         var fileStructure = new FileStructure(rowCount);
         var fileResult = await _fileStructureValidator.ValidateAsync(fileStructure, ct);
         if (!fileResult.IsValid)
