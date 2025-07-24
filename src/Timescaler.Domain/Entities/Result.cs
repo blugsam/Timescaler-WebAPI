@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Timescaler.Domain.ValueObjects;
+﻿using Timescaler.Domain.ValueObjects;
 
 namespace Timescaler.Domain.Entities;
 
