@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36301.6 d17.14
+VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timescaler.API", "src\Timescaler.API\Timescaler.API.csproj", "{3FFDC4CB-0CF3-4A15-8537-79ECB6948761}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timescaler.Domain", "src\Timescaler.Domain\Timescaler.Domain.csproj", "{AFF23EA0-52D9-4995-8E9F-E3A83A276A04}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timescaler.Infrastructure", "src\Timescaler.Infrastructure\Timescaler.Infrastructure.csproj", "{29FB1680-5162-4017-A332-636C8AAEC8BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timescaler.Tests", "Timescaler.Tests\Timescaler.Tests.csproj", "{88C48D72-3F30-486A-BD70-0ABEF4E60222}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{29FB1680-5162-4017-A332-636C8AAEC8BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29FB1680-5162-4017-A332-636C8AAEC8BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29FB1680-5162-4017-A332-636C8AAEC8BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88C48D72-3F30-486A-BD70-0ABEF4E60222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88C48D72-3F30-486A-BD70-0ABEF4E60222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88C48D72-3F30-486A-BD70-0ABEF4E60222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88C48D72-3F30-486A-BD70-0ABEF4E60222}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
