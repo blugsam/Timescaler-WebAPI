@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Timescaler.Application\Timescaler.Application.csproj" />
+    <ProjectReference Include="..\Timescaler.Application\Timescaler.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

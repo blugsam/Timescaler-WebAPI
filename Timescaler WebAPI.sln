@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timescaler.Domain", "src\Ti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timescaler.Infrastructure", "src\Timescaler.Infrastructure\Timescaler.Infrastructure.csproj", "{29FB1680-5162-4017-A332-636C8AAEC8BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timescaler.Tests", "Timescaler.Tests\Timescaler.Tests.csproj", "{88C48D72-3F30-486A-BD70-0ABEF4E60222}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timescaler.Tests", "src\Timescaler.Tests\Timescaler.Tests.csproj", "{88C48D72-3F30-486A-BD70-0ABEF4E60222}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
