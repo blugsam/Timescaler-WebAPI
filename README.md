@@ -1,4 +1,12 @@
 # Timescaler-WebAPI
+- **Платформа:** .NET 9
+- **Веб-фреймворк:** ASP.NET Core 9
+- **База данных:** PostgreSQL 17
+- **ORM:** Entity Framework Core 9
+- **Документация API:** Swagger
+- **Валидация:** FluentValidation
+- **Логирование:** Serilog
+- **Тестирование:** xunit
 ## Руководство пользователя
 ### Копирование репозитория
 Склонируйте репозиторий на ваш компьютер, выполнив следующую команду:
@@ -214,3 +222,7 @@ Response body (code 200):
   "hasNextPage": false
 }
 ```
+## Тестирование
+Все разработанные тесты для ключевой бизнес-логики проходят успешно
+
+<img width="774" height="551" alt="image" src="https://github.com/user-attachments/assets/1e188a92-513e-4e88-aa86-70d9bce9ca61" />
