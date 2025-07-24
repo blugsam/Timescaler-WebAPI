@@ -52,7 +52,7 @@ public class FileValidator : IFileValidator
 
             if (parsedRow is null)
             {
-                errors.Add(new ValidationError(lineNumber, "Произошла внутренняя ошибка парсинга."));
+                errors.Add(new ValidationError(lineNumber, "An internal error has occurred."));
                 continue;
             }
 

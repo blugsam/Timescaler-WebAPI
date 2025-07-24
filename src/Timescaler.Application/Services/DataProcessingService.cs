@@ -33,7 +33,7 @@ public class DataProcessingService : IDataProcessingService
 
     public async Task ProcessCsvFileAsync(string fileName, Stream fileStream, CancellationToken ct)
     {
-        _logger.LogInformation("Начало обработки файла: {FileName}", fileName);
+        _logger.LogInformation("Beginning of file processing: {FileName}", fileName);
 
         var lines = _csvParser.ParseAsync(fileStream, ct);
 
@@ -41,7 +41,7 @@ public class DataProcessingService : IDataProcessingService
 
         if (!validationResult.IsSuccess)
         {
-            _logger.LogWarning("Файл {FileName} не прошел валидацию. Ошибок: {ErrorCount}",
+            _logger.LogWarning("The {FileName} file failed validation. Errors: {ErrorCount}",
                 fileName, validationResult.Errors.Count);
 
             var failures = validationResult.Errors
@@ -53,7 +53,7 @@ public class DataProcessingService : IDataProcessingService
             throw new ValidationException(failures);
         }
 
-        _logger.LogInformation("Файл {FileName} прошел валидацию. Начинаем сохранение.", fileName);
+        _logger.LogInformation("The {FileName} file has been validated.", fileName);
 
         var dataPoints = validationResult.ValidRecords
             .Select(r => new RawDataPoint(r.Date, r.ExecutionTime, r.Value))
@@ -61,7 +61,7 @@ public class DataProcessingService : IDataProcessingService
 
         await _resultRepository.UpsertAsync(fileName, dataPoints, ct);
 
-        _logger.LogInformation("Файл {FileName} успешно обработан. Записей: {Count}", fileName, dataPoints.Count);
+        _logger.LogInformation("The {FileName} file has been successfully processed. Records: {Count}", fileName, dataPoints.Count);
     }
 
     public async Task<PaginatedList<ResultDto>> GetResultsAsync(ResultFilter filter, Page page, CancellationToken ct)

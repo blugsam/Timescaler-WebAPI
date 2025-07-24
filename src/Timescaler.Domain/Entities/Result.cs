@@ -26,10 +26,10 @@ public class Result
     public static Result Create(string fileName, IReadOnlyList<RawDataPoint> records)
     {
         if (string.IsNullOrWhiteSpace(fileName))
-            throw new ArgumentException("Имя файла не может быть пустым.", nameof(fileName));
+            throw new ArgumentException("The file name cannot be empty.", nameof(fileName));
 
         if (records == null || !records.Any())
-            throw new ArgumentException("Коллекция записей не может быть пустой.", nameof(records));
+            throw new ArgumentException("The record collection cannot be empty.", nameof(records));
 
         var dates = new List<DateTime>(records.Count);
         var values = new List<decimal>(records.Count);

@@ -25,31 +25,31 @@ public class ImportController : ControllerBase
     {
         if (file == null || file.Length == 0)
         {
-            return BadRequest("Файл не был предоставлен.");
+            return BadRequest("The file was not provided.");
         }
 
         try
         {
             await using var stream = file.OpenReadStream();
             await _dataProcessingService.ProcessCsvFileAsync(file.FileName, stream, ct);
-            return Ok($"Файл '{file.FileName}' успешно обработан.");
+            return Ok($"File '{file.FileName}' successfully processed.");
         }
         catch (ValidationException ex)
         {
-            _logger.LogWarning("Файл {FileName} не прошел валидацию. Ошибки: {Errors}",
+            _logger.LogWarning("The {FileName} file failed validation. Errors: {Errors}",
                 file.FileName,
                 string.Join("; ", ex.Errors.Select(e => $"{e.PropertyName}: {e.ErrorMessage}")));
 
             return BadRequest(new
             {
-                Title = "Ошибки валидации файла",
+                Title = "File validation errors",
                 Errors = ex.Errors.Select(e => new { Field = e.PropertyName, Message = e.ErrorMessage })
             });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Непредвиденная ошибка при обработке файла {FileName}", file.FileName);
-            return StatusCode(StatusCodes.Status500InternalServerError, "Внутренняя ошибка сервера.");
+            _logger.LogError(ex, "Unexpected error when processing the {FileName} file", file.FileName);
+            return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error.");
         }
     }
 }

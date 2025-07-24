@@ -10,6 +10,7 @@ public class CsvParser : ICsvParser
     {
         using var reader = new StreamReader(stream);
 
+        // закомментировать эту строку, если файл не включает в себя заголовок
         await reader.ReadLineAsync(ct);
 
         string? line;

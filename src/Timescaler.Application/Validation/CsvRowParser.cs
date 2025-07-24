@@ -22,19 +22,19 @@ public class CsvRowParser : ICsvRowParser
 
         if (!DateTime.TryParseExact(fields[0], CustomDateTimeFormat, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out var date))
         {
-            parseError = "Неверный формат даты. Ожидался формат 'yyyy-MM-ddTHH-mm-ss.ffffZ'.";
+            parseError = "Incorrect date format. Expected format: 'yyyy-MM-ddTHH-mm-ss.ffffZ'.";
             return false;
         }
 
         if (!double.TryParse(fields[1], CultureInfo.InvariantCulture, out var executionTime))
         {
-            parseError = "Неверный формат времени выполнения.";
+            parseError = "Incorrect execution time format.";
             return false;
         }
 
         if (!decimal.TryParse(fields[2], CultureInfo.InvariantCulture, out var value))
         {
-            parseError = "Неверный формат значения.";
+            parseError = "Invalid value format.";
             return false;
         }
 

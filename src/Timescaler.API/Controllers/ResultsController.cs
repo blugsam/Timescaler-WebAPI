@@ -49,7 +49,7 @@ public class ResultsController : ControllerBase
 
         if (!values.Any())
         {
-            return NotFound($"Данные для файла '{fileName}' не найдены.");
+            return NotFound($"No data was found for the file '{fileName}'.");
         }
 
         return Ok(values);

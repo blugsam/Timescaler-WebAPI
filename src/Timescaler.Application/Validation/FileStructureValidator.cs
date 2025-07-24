@@ -11,9 +11,9 @@ public class FileStructureValidator : AbstractValidator<FileStructure>
     {
         RuleFor(x => x.RowCount)
             .GreaterThanOrEqualTo(MinRowCount)
-            .WithMessage($"Файл должен содержать минимум {MinRowCount} строку с данными.")
+            .WithMessage($"The file must contain at least a {MinRowCount} data string.")
             .LessThanOrEqualTo(MaxRowCount)
-            .WithMessage($"Количество строк в файле ({nameof(FileStructure.RowCount)}) превышает максимум ({MaxRowCount}).");
+            .WithMessage($"The number of lines in the file ({nameof(FileStructure.RowCount)}) exceeds the maximum ({MaxRowCount}).");
     }
 }
 

@@ -10,16 +10,16 @@ public class CsvBusinessRulesValidator : AbstractValidator<ParsedCsvRow>
     {
         RuleFor(x => x.Date)
             .LessThanOrEqualTo(DateTime.UtcNow)
-            .WithMessage("Дата не может быть в будущем.")
+            .WithMessage("The date cannot be in the future.")
             .GreaterThanOrEqualTo(MinDate)
-            .WithMessage("Дата не может быть ранее 01.01.2000.");
+            .WithMessage("The date cannot be earlier than 01.01.2000.");
 
         RuleFor(x => x.ExecutionTime)
             .GreaterThanOrEqualTo(0)
-            .WithMessage("Время выполнения не может быть отрицательным.");
+            .WithMessage("The execution time cannot be negative.");
 
         RuleFor(x => x.Value)
             .GreaterThanOrEqualTo(0)
-            .WithMessage("Значение показателя не может быть отрицательным.");
+            .WithMessage("The indicator value cannot be negative.");
     }
 }
